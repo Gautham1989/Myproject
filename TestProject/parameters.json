@@ -2,16 +2,13 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_NewVM_name": {
+        "virtualMachines_abc_name": {
             "value": null
         },
-        "images_abc_image_20201003014813_externalid": {
+        "disks_abc_OsDisk_1_528a870b15e14bb2920f681532442477_externalid": {
             "value": null
         },
-        "disks_NewVM_disk1_05619b7ffd394850a8c6214bc185d797_externalid": {
-            "value": null
-        },
-        "networkInterfaces_newvm509_externalid": {
+        "networkInterfaces_abc440_externalid": {
             "value": null
         }
     }

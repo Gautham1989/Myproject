@@ -2,20 +2,16 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_NewVM_name": {
-            "defaultValue": "NewVM",
+        "virtualMachines_abc_name": {
+            "defaultValue": "abc",
             "type": "String"
         },
-        "images_abc_image_20201003014813_externalid": {
-            "defaultValue": "/subscriptions/1bbef65a-cee3-436d-95f4-b53dcabed4f0/resourceGroups/GAzure/providers/Microsoft.Compute/images/abc-image-20201003014813",
+        "disks_abc_OsDisk_1_528a870b15e14bb2920f681532442477_externalid": {
+            "defaultValue": "/subscriptions/1bbef65a-cee3-436d-95f4-b53dcabed4f0/resourceGroups/GAZURE/providers/Microsoft.Compute/disks/abc_OsDisk_1_528a870b15e14bb2920f681532442477",
             "type": "String"
         },
-        "disks_NewVM_disk1_05619b7ffd394850a8c6214bc185d797_externalid": {
-            "defaultValue": "/subscriptions/1bbef65a-cee3-436d-95f4-b53dcabed4f0/resourceGroups/GAZURE/providers/Microsoft.Compute/disks/NewVM_disk1_05619b7ffd394850a8c6214bc185d797",
-            "type": "String"
-        },
-        "networkInterfaces_newvm509_externalid": {
-            "defaultValue": "/subscriptions/1bbef65a-cee3-436d-95f4-b53dcabed4f0/resourceGroups/GAzure/providers/Microsoft.Network/networkInterfaces/newvm509",
+        "networkInterfaces_abc440_externalid": {
+            "defaultValue": "/subscriptions/1bbef65a-cee3-436d-95f4-b53dcabed4f0/resourceGroups/GAzure/providers/Microsoft.Network/networkInterfaces/abc440",
             "type": "String"
         }
     },
@@ -24,7 +20,7 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-07-01",
-            "name": "[parameters('virtualMachines_NewVM_name')]",
+            "name": "[parameters('virtualMachines_abc_name')]",
             "location": "eastus",
             "properties": {
                 "hardwareProfile": {
@@ -32,21 +28,24 @@
                 },
                 "storageProfile": {
                     "imageReference": {
-                        "id": "[parameters('images_abc_image_20201003014813_externalid')]"
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_NewVM_name'), '_disk1_05619b7ffd394850a8c6214bc185d797')]",
+                        "name": "[concat(parameters('virtualMachines_abc_name'), '_OsDisk_1_528a870b15e14bb2920f681532442477')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
-                            "id": "[parameters('disks_NewVM_disk1_05619b7ffd394850a8c6214bc185d797_externalid')]"
+                            "id": "[parameters('disks_abc_OsDisk_1_528a870b15e14bb2920f681532442477_externalid')]"
                         }
                     },
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachines_NewVM_name')]",
+                    "computerName": "[parameters('virtualMachines_abc_name')]",
                     "adminUsername": "gautham",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
@@ -59,7 +58,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[parameters('networkInterfaces_newvm509_externalid')]"
+                            "id": "[parameters('networkInterfaces_abc440_externalid')]"
                         }
                     ]
                 },
