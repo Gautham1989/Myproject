@@ -1,0 +1,74 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_NewVM_name": {
+            "defaultValue": "NewVM",
+            "type": "String"
+        },
+        "images_abc_image_20201003014813_externalid": {
+            "defaultValue": "/subscriptions/1bbef65a-cee3-436d-95f4-b53dcabed4f0/resourceGroups/GAzure/providers/Microsoft.Compute/images/abc-image-20201003014813",
+            "type": "String"
+        },
+        "disks_NewVM_disk1_05619b7ffd394850a8c6214bc185d797_externalid": {
+            "defaultValue": "/subscriptions/1bbef65a-cee3-436d-95f4-b53dcabed4f0/resourceGroups/GAZURE/providers/Microsoft.Compute/disks/NewVM_disk1_05619b7ffd394850a8c6214bc185d797",
+            "type": "String"
+        },
+        "networkInterfaces_newvm509_externalid": {
+            "defaultValue": "/subscriptions/1bbef65a-cee3-436d-95f4-b53dcabed4f0/resourceGroups/GAzure/providers/Microsoft.Network/networkInterfaces/newvm509",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2019-07-01",
+            "name": "[parameters('virtualMachines_NewVM_name')]",
+            "location": "eastus",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D2s_v3"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "id": "[parameters('images_abc_image_20201003014813_externalid')]"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_NewVM_name'), '_disk1_05619b7ffd394850a8c6214bc185d797')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "id": "[parameters('disks_NewVM_disk1_05619b7ffd394850a8c6214bc185d797_externalid')]"
+                        }
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_NewVM_name')]",
+                    "adminUsername": "gautham",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[parameters('networkInterfaces_newvm509_externalid')]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                }
+            }
+        }
+    ]
+}
